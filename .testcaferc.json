@@ -3,7 +3,7 @@
     "src": "tests/fixtures/",
     "reporter": {
         "name": "json",
-        "output": "tests/report.json"
+        "output": "tests/reports/report.json"
     },
     "skipUncaughtErrors": true
 }
