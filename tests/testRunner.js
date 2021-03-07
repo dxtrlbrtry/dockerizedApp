@@ -1,4 +1,4 @@
-var createTestCafe = require('../node_modules/testcafe');
+var createTestCafe = require('testcafe');
 
 (async () => {
     const testCafe = await createTestCafe();
