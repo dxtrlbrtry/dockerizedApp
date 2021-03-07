@@ -22,5 +22,3 @@ services:
       - db
     stdin_open: true
     tty: true
-    volumes:
-      - /tests/reports/:/tests/reports/
