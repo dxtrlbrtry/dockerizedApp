@@ -10,7 +10,7 @@ const HOST = '0.0.0.0';
 const app = express();
 
 exports.db = new DbService({
-    'host': '172.18.0.2',
+    'host': '172.19.0.2',
     'port': 33060,
     'user': 'root',
     'password': 'password'
