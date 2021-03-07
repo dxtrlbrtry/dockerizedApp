@@ -1,33 +1,16 @@
 FROM node:15.11.0-alpine3.10
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN apt-get update; apt-get clean
-
-# Add a user for running applications.
-RUN useradd apps
-RUN mkdir -p /home/apps && chown apps:apps /home/apps
-
-# Install x11vnc.
-RUN apt-get install -y x11vnc
-
-# Install xvfb.
-RUN apt-get install -y xvfb
-
-# Install fluxbox.
-RUN apt-get install -y fluxbox
-
-# Install wget.
-RUN apt-get install -y wget
-
-# Install wmctrl.
-RUN apt-get install -y wmctrl
-
-# Set the Chrome repo.
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
-
-# Install Chrome.
-RUN apt-get update && apt-get -y install google-chrome-stable
+RUN apk update && apk add --no-cache nmap && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache \
+    chromium \
+    harfbuzz \
+    "freetype>2.8" \
+    ttf-freefont \
+    nss
 RUN npm install
 COPY . .
 EXPOSE 1234
