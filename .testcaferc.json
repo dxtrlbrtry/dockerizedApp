@@ -1,5 +1,5 @@
 {
-    "browsers": "chrome:headless",
+    "browsers": "/usr/bin/chromium-browser:headless",
     "src": "tests/fixtures/",
     "reporter": {
         "name": "json",
