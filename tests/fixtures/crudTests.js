@@ -2,7 +2,7 @@ const schemas = require('../../lib/schemas');
 const apiService = require('../apiService');
 const DbService = require('../../lib/dbService').DbService
 var dbService = new DbService({
-    'host': '127.0.0.1',
+    'host': '172.19.0.2',
     'port': 33060,
     'user': 'root',
     'password': 'password'
