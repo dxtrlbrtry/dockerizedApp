@@ -6,16 +6,23 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: db
-      MYSQL_USER: user
+      MYSQL_USER: root
       MYSQL_PASSWORD: password
     ports:
       - "33060:33060"
   app:
-    restart: always
+    image: web-app
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: web-app
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: db
+      APP_PORT: 1234
+      APP_HOST: "0.0.0.0"
     ports:
       - "1234:1234"
     depends_on:
