@@ -4,12 +4,12 @@ services:
   db:
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "33060:33060"
+      - ${DB_PORT}:${DB_PORT}
   app:
     image: web-app
     build:
@@ -17,14 +17,16 @@ services:
       dockerfile: ./Dockerfile
     restart: always
     environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: db
-      APP_PORT: 1234
-      APP_HOST: "0.0.0.0"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      APP_PORT: ${APP_PORT}
+      APP_HOST: ${APP_HOST}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
     ports:
-      - "1234:1234"
+      - ${APP_PORT}:${APP_PORT}
     depends_on:
       - db
     stdin_open: true
