@@ -5,10 +5,6 @@ services:
     image: mysql
     env_file:
       - .env
-    environment:
-      MYSQL_ROOT_PASSWORD: /run/secrets/db_root_password
-    secrets:
-      - db_root_password
     ports:
       - ${DB_PORT}:${DB_PORT}
   app:
@@ -19,22 +15,9 @@ services:
     restart: always
     env_file:
       - .env
-    environment:
-      MYSQL_USER: /run/secrets/db_user
-      MYSQL_PASSWORD: /run/secrets/db_password
-    secrets:
-      - db_user
-      - db_password
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
       - db
     stdin_open: true
     tty: true
-secrets:
-  db_user:
-    external: true
-  db_password:
-    external: true
-  db_root_password:
-    external: true
