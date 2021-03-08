@@ -3,8 +3,8 @@ version: "3.9"
 services: 
   db:
     image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    env_file:
+      - .env
     ports:
       - ${DB_PORT}:${DB_PORT}
   app:
@@ -13,14 +13,8 @@ services:
       context: .
       dockerfile: ./Dockerfile
     restart: always
-    environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      APP_PORT: ${APP_PORT}
-      APP_HOST: ${APP_HOST}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
+    env_file:
+      - .env
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
