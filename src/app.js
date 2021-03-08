@@ -1,12 +1,9 @@
 'use strict';
 
-const express = require('express');
-
 const user = require('../lib/endpoints/users');
 const testObject = require('../lib/endpoints/testObjects');
 
-const appConfig = require('./appConfig')
-
+const express = require('express');
 const app = express();
 
 app.use(express.json());
@@ -19,5 +16,5 @@ app.get('/test/', testObject.getObjects);
 app.post('/test', testObject.addObject);
 app.delete('/test/', testObject.deleteObject)
 
-app.listen(appConfig.port, appConfig.host);
-console.log('Running on http://' + appConfig.host + ':' + appConfig.port);
+app.listen(process.env.APP_PORT, process.env.APP_HOST);
+console.log('Running on http://' + process.env.APP_HOST + ':' + process.env.APP_PORT);

@@ -1,1 +1,0 @@
-curl "http://localhost:50000/job/test%%20pipeline/build?token=dockerizedAppBuild" --user dxtrlbrtry:114b4a76c66089c5aae844b29d6291565a
