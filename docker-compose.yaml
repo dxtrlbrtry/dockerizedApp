@@ -22,11 +22,10 @@ services:
       APP_HOST: ${APP_HOST}
       APP_PORT: ${APP_PORT}
       DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
-      - db
+      - ${DB_HOST}
     stdin_open: true
     tty: true
 volumes:
