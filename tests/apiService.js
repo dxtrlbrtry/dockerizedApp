@@ -1,13 +1,15 @@
 const request = require('request-promise');
 const schemas = require('../lib/dbService').schemas;
 
+const baseUrl = 'http://' + process.env.APP_HOST + ':' + process.env.APP_PORT;
+
 exports.getAll = async function (schema) {
   let endpoint =
     schema == schemas.user ? 'users/' :
     schema == schemas.testObject ? 'test/' : '';
   const options = {
     method: 'GET',
-    url: 'http://localhost:1234/' + endpoint,
+    url: baseUrl + '/' + endpoint,
     json: false,
     resolveWithFullResponse: false
   }
@@ -22,7 +24,7 @@ exports.addItem = async function(schema, item) {
     schema == schemas.testObject ? 'test/' : '';
   const options = {
     method: 'POST',
-    url: 'http://localhost:1234/' + endpoint,
+    url: baseUrl + '/' + endpoint,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
     json: false,
@@ -39,7 +41,7 @@ exports.deleteItem = async function(schema, item) {
     schema == schemas.testObject ? 'test/' : '';
   const options = {
     method: 'DELETE',
-    url: 'http://localhost:1234/' + endpoint,
+    url: baseUrl + '/' + endpoint,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
     json: false,

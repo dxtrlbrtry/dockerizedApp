@@ -13,7 +13,7 @@ services:
     image: web-app
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./src/Dockerfile
     restart: always
     environment:      
       MYSQL_DATABASE: ${MYSQL_DATABASE}
