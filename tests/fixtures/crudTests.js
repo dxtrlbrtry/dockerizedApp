@@ -1,12 +1,6 @@
 const schemas = require('../../lib/schemas');
 const apiService = require('../apiService');
-const DbService = require('../../lib/dbService').DbService
-var dbService = new DbService({
-    'host': '172.19.0.2',
-    'port': 33060,
-    'user': 'root',
-    'password': 'password'
-})
+const dbService = require('../../lib/dbService');
 
 fixture`GetTest`
     .beforeEach(t => {
