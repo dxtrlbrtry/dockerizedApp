@@ -10,7 +10,8 @@ node('master') {
     def reportPath = 'tests/reports/report.json'
     try {
         stage('run tests') {
-            docker.image('testpipeline_app_1').inside() {
+            println(pwd())
+            docker.image('testpipeline_app_1').inside("-v " + pwd() + "/tests/reports:/usr/src/app/tests/reports") {
                 sh 'node tests/testRunner.js'
             }
             bat 'docker ps -a'
