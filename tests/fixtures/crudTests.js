@@ -1,6 +1,6 @@
-const schemas = require('../../lib/schemas');
 const apiService = require('../apiService');
 const dbService = require('../../lib/dbService');
+const schemas = dbService.schemas;
 
 fixture`GetTest`
     .beforeEach(t => {

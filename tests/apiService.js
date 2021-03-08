@@ -1,5 +1,5 @@
 const request = require('request-promise');
-const schemas = require('../lib/schemas');
+const schemas = require('../lib/dbService').schemas;
 
 exports.getAll = async function (schema) {
   let endpoint =
