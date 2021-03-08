@@ -19,5 +19,5 @@ app.get('/test/', testObject.getObjects);
 app.post('/test', testObject.addObject);
 app.delete('/test/', testObject.deleteObject)
 
-app.listen(appConfig.port, appconfig.host);
-console.log('Running on http://' + appconfig.host + ':' + appconfig.port);
+app.listen(appConfig.port, appConfig.host);
+console.log('Running on http://' + appConfig.host + ':' + appConfig.port);
