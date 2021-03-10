@@ -25,7 +25,7 @@ node('master') {
                     //}
                     //bat "docker cp testpipeline_app_1:/usr/src/app/" + reportPath + " " + reportPath
 
-                    def jsonReport = readJSON file: reportPath
+                    def jsonReport = readJSON file: reportPath + 'report.json'
                     for (fixture in jsonReport.fixtures) {
                         for (test in fixture.tests) {
                             for (error in test.errs) {
