@@ -1,6 +1,6 @@
 var mysqlx = require('@mysql/xdevapi');
 var request = require('request-promise')
-var dbService = require('./lib/dbService')
+var dbService = require('../lib/dbService')
 
 function createSession() {
     args = process.argv.slice(2);
