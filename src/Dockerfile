@@ -12,6 +12,6 @@ RUN apk update && apk add --no-cache nmap && \
     ttf-freefont \
     nss
 RUN npm install
-COPY . .
-RUN ls src/
+COPY lib lib
+COPY src src
 CMD [ "node", "src/app.js" ]
