@@ -10,12 +10,12 @@ node('master') {
                 MYSQL_PASSWORD = mysql_password
                 ASD = 'asd'
         }
-        println(env.ASD)
-        println(env.MYSQL_PASSWORD)
+        println(ASD)
+        println(MYSQL_PASSWORD)
     }
         stage('checkout') {
-            println(env.ASD)
-            println(env.MYSQL_PASSWORD)
+            println(ASD)
+            println(MYSQL_PASSWORD)
             git branch: 'main', credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
         }
         stage('rebuild app') {
