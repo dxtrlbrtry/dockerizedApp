@@ -37,9 +37,9 @@ services:
         MYSQL_DATABASE: ${MYSQL_DATABASE}
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-        APP_HOST: localhost
+        APP_HOST: http://localhost
         APP_PORT: ${APP_PORT}
-        DB_HOST: "localhost:33060"
+        DB_HOST: "http://localhost:33060"
 volumes:
   mysql-data:
     driver: local
