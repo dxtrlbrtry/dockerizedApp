@@ -13,5 +13,5 @@ RUN apk update && apk add --no-cache nmap && \
     nss
 RUN npm install
 COPY . .
-RUN ls
-CMD [ "node", "app.js" ]
+RUN ls src/
+CMD [ "node", "src/app.js" ]
