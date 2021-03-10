@@ -15,13 +15,14 @@ node('master') {
                 bat "docker-compose up -d"
                 bat "docker image prune -a -f"
             }
-            def reportPath = 'tests/reports/'
+            def reportPath = '/tests/reports/'
             try {
                 stage('run tests') {
+                    bat 'docker run --rm -d -v ' + pwd() + reportPath + ':/usr/src/app' + reportPath + ' tests node tests/testRunner.js'
                     //bat 'docker exec -t testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js"'
-                    docker.image('testpipeline_tests_1').inside('-v ' + reportPath + ':/usr/src/app/' + reportPath) {
-                        sh 'node tests/testRunner.js'
-                    }
+                    //docker.image('testpipeline_tests_1').inside('-v ' + reportPath + ':/usr/src/app/' + reportPath) {
+                    //    sh 'node tests/testRunner.js'
+                    //}
                     //bat "docker cp testpipeline_app_1:/usr/src/app/" + reportPath + " " + reportPath
 
                     def jsonReport = readJSON file: reportPath
