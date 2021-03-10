@@ -11,6 +11,7 @@ RUN apk update && apk add --no-cache nmap && \
     "freetype>2.8" \
     ttf-freefont \
     nss
+EXPOSE 1234
 RUN npm install
 COPY . .
 RUN ls src/
