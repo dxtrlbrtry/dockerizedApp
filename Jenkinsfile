@@ -1,11 +1,10 @@
 node('master') {
     withCredentials([
-            string(credentialsId: 'mysql_root_password', variable: 'ROOT_PASS'),
+            string(credentialsId: 'mysql_root_password', variable: 'mysql_root_password'),
             string(credentialsId: 'mysql_user', variable: 'mysql_user'),
             string(credentialsId: 'mysql_password', variable: 'mysql_password')
         ]) {
-            withEnv(['MYSQL_USER=$mysql_user', 'ASD=asd']) {
-                println(env.ASD)
+            withEnv(['MYSQL_USER=$mysql_user', 'ASD=asd', 'MYSQL_PASSWORD=$mysql_password', 'MYSQL_ROOT_PASSWORD=mysql_root_password']) {
                 
            
 stage('checkout') {
