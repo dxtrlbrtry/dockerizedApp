@@ -4,7 +4,7 @@ node('master') {
             string(credentialsId: 'mysql_user', variable: 'username'),
             string(credentialsId: 'mysql_password', variable: 'passw')
         ]) {
-            withEnv(['MYSQL_USER=$username', 'MYSQL_PASSWORD=$passw', 'MYSQL_ROOT_PASSWORD=$root_pass']) {
+            withEnv(['MYSQL_USER=${username}', 'MYSQL_PASSWORD=${passw}', 'MYSQL_ROOT_PASSWORD=${root_pass}']) {
                 
            
 stage('checkout') {
