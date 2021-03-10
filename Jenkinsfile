@@ -1,5 +1,5 @@
 node('master') {
-    environnment {
+    environment {
         withCredentials([
             string(credentialsId: 'mysql_root_password', variable: 'mysql_root_password'),
             string(credentialsId: 'mysql_user', variable: 'mysql_user'),
