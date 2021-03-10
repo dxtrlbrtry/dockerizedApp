@@ -1,9 +1,9 @@
 node('master') {
-    withCredentials[
+    withCredentials([
         string(credentialsId: 'mysql_root_password', variable: 'mysql_root_password'),
         string(credentialsId: 'mysql_user', variable: 'mysql_user'),
         string(credentialsId: 'mysql_password', variable: 'mysql_password'),
-    ] {
+    ]) {
         MYSQL_ROOT_PASSWORD =   $mysql_root_password
         MYSQL_USER =            $mysql_user
         MYSQL_PASSWORD =        $mysql_password
