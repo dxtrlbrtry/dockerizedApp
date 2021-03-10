@@ -5,7 +5,7 @@ var dbService = require('../lib/dbService')
 function createSession() {
     args = process.argv.slice(2);
     return mysqlx.getSession({
-      "host": argv[0],
+      "host": args[0],
       "user": "root",
       "password": "password",
       "database": "db"
@@ -19,7 +19,7 @@ function createSession() {
         .catch(err => console.log(err));
         const options = {
             method: 'GET',
-            url: argv[1] + '/users/',
+            url: process.argv.slice(2)[1] + '/users/',
             json: false,
             resolveWithFullResponse: false
           }
