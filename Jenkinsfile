@@ -13,6 +13,7 @@ node('master') {
             }
             stage('rebuild app') {
                 bat "docker-compose build app"
+                bat "docker-compose build tests"
                 bat "docker-compose up -d"
                 bat "docker image prune -a -f"
             }
