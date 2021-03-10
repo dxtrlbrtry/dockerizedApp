@@ -1,7 +1,7 @@
 const request = require('request-promise');
 const schemas = require('../lib/dbService').schemas;
 
-const baseUrl = 'http://' + process.env.APP_HOST + ':' + process.env.APP_PORT;
+const baseUrl = 'http://' + 'localhost' + ':' + process.env.APP_PORT;
 
 exports.getAll = async function (schema) {
   let endpoint =
