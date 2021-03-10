@@ -25,7 +25,7 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
-      - ${DB_HOST}
+      - db
     stdin_open: true
     tty: true
   tests:
