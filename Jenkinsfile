@@ -38,7 +38,7 @@ node('master') {
             }
             finally {
                 stage('archive') {
-                    archiveArtifacts artifacts: reportPath, followSymlinks: false
+                    archiveArtifacts artifacts: reportPath + '/**/*.*', followSymlinks: false
                 }
             }
         }
