@@ -25,9 +25,23 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
     depends_on:
-      - ${DB_HOST}
+      - db
     stdin_open: true
     tty: true
+  tests:
+    image: tests
+    build:
+      context: .
+      dockerfile: ./tests/Dockerfile
+      args:
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        APP_HOST: ${APP_HOST}
+        APP_PORT: ${APP_PORT}
+        DB_HOST: ${DB_HOST}
+    depends_on:
+      - app
 volumes:
   mysql-data:
     driver: local
