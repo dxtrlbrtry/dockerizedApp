@@ -20,7 +20,7 @@ node('master') {
                 stage('run tests') {
                     //bat 'docker run --rm -d -v "' + pwd() + reportPath + '":"/usr/src/app' + reportPath + '" tests node tests/testRunner.js'
                     //bat 'docker exec -t testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js"'
-                    docker.image('testpipeline_tests_1').inside('-v ' + pwd() + reportPath + ':/usr/src/app/' + reportPath) {
+                    docker.image('testpipeline_tests_1').inside('-v "' + pwd() + reportPath + '":"/usr/src/app/' + reportPath + '"') {
                         sh 'ls'
                         sh 'node tests/testRunner.js'
                     }
