@@ -4,18 +4,11 @@ node('master') {
             string(credentialsId: 'mysql_user', variable: 'mysql_user'),
             string(credentialsId: 'mysql_password', variable: 'mysql_password')
         ]) {
-            bat 'echo $ROOT_PASS'
-            echo ROOT_PASS
-            environment {
-                    MYSQL_ROOT_PASSWORD = ROOT_PASS
-                    MYSQL_USER = mysql_user
-                    MYSQL_PASSWORD = mysql_password
-                    ASD = 'asd'
-            }
-            println(env.ASD)
-            println(env.ROOT_PASS)
-        }
-        stage('checkout') {
+            withEnv(['MYSQL_USER=$mysql_user', 'ASD=asd']) {
+                println(env.ASD)
+                
+           
+stage('checkout') {
             println(env.ASD)
             println(env.ROOT_PASS)
             git branch: 'main', credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
@@ -47,4 +40,7 @@ node('master') {
                 archiveArtifacts artifacts: reportPath, followSymlinks: false
             }
         }
+            }
+        }
+        
 }
