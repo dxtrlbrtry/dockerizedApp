@@ -1,7 +1,7 @@
 'use strict';
 
-const user = require('./testObjects');
-const testObject = require('./testObjects');
+const user = require('./endpoints/testObjects');
+const testObject = require('./endpoints/testObjects');
 
 const express = require('express');
 const app = express();
