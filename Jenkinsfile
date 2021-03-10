@@ -19,7 +19,7 @@ node('master') {
             try {
                 stage('run tests') {
                     //bat 'docker exec -t testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js"'
-                    docker.image('testpipeline_tests_1').inside('-v testpipeline_tests_1:/usr/src/app/' + reportPath + ' ' + reportPath) {
+                    docker.image('testpipeline_tests_1').inside('-v testpipeline_tests_1:/usr/src/app/' + reportPath + ':' + reportPath) {
                         sh 'node tests/testRunner.js'
                     }
                     //bat "docker cp testpipeline_app_1:/usr/src/app/" + reportPath + " " + reportPath
