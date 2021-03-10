@@ -8,7 +8,7 @@ node('master') {
         'MYSQL_PASSWORD=' + env.MYSQL_PASSWORD, 
         'MYSQL_ROOT_PASSWORD=' + env.MYSQL_ROOT_PASSWORD]) {   
             stage('checkout') {
-                git branch: 'main', credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
+                    git branch: params.BRANCH, credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
             }
             stage('rebuild app') {
                 bat "docker-compose build app"
