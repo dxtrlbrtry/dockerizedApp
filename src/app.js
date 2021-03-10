@@ -1,6 +1,6 @@
 'use strict';
 
-const user = require('./endpoints/testObjects');
+const user = require('./endpoints/users');
 const testObject = require('./endpoints/testObjects');
 
 const express = require('express');
