@@ -18,9 +18,11 @@ node('master') {
             def reportPath = 'tests/reports/report.json'
             try {
                 stage('run tests') {
-                    bat 'docker exec -t testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js"'
-
-                    bat "docker cp testpipeline_app_1:/usr/src/app/" + reportPath + " " + reportPath
+                    //bat 'docker exec -t testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js"'
+                    docker.image('testpipeline_tests_1').inside('-v testpipeline_tests_1:/usr/src/app/' + reportPath + ' ' + reportPath) {
+                        sh 'node tests/testRunner.js'
+                    }
+                    //bat "docker cp testpipeline_app_1:/usr/src/app/" + reportPath + " " + reportPath
 
                     def jsonReport = readJSON file: reportPath
                     for (fixture in jsonReport.fixtures) {
