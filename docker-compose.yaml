@@ -28,6 +28,20 @@ services:
       - ${DB_HOST}
     stdin_open: true
     tty: true
+  tests:
+    image: tests
+    build:
+      context: .
+      dockerfile: ./tests/Dockerfile
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      APP_HOST: ${APP_HOST}
+      APP_PORT: ${APP_PORT}
+      DB_HOST: ${DB_HOST}
+    depends_on:
+      - app
 volumes:
   mysql-data:
     driver: local

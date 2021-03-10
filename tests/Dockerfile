@@ -13,5 +13,5 @@ RUN apk update && apk add --no-cache nmap && \
     nss
 RUN npm install
 COPY lib lib
-COPY src src
-CMD ["node", "src/app.js"]
+COPY tests tests
+COPY .testcaferc.json .
