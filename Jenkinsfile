@@ -4,6 +4,8 @@ node('master') {
             string(credentialsId: 'mysql_user', variable: 'mysql_user'),
             string(credentialsId: 'mysql_password', variable: 'mysql_password')
         ]) {
+            bat 'echo $mysql_user'
+            echo mysql_user
             environment {
                     env.MYSQL_ROOT_PASSWORD = mysql_root_password
                     env.MYSQL_USER = mysql_user
