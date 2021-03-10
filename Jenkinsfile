@@ -5,10 +5,10 @@ node('master') {
             string(credentialsId: 'mysql_password', variable: 'mysql_password')
         ]) {
             environment {
-                    MYSQL_ROOT_PASSWORD = mysql_root_password
-                    MYSQL_USER = mysql_user
-                    MYSQL_PASSWORD = mysql_password
-                    ASD = 'asd'
+                    env.MYSQL_ROOT_PASSWORD = mysql_root_password
+                    env.MYSQL_USER = mysql_user
+                    env.MYSQL_PASSWORD = mysql_password
+                    env.ASD = 'asd'
             }
             println(env.ASD)
             println(env.MYSQL_PASSWORD)
