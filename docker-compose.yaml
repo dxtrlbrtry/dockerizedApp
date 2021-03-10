@@ -39,7 +39,7 @@ services:
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         APP_HOST: ${APP_HOST}
         APP_PORT: ${APP_PORT}
-        DB_HOST: ${DB_HOST}
+        DB_HOST: "172.21.0.3:33060"
 volumes:
   mysql-data:
     driver: local
