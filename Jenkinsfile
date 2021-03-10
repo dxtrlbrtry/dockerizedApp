@@ -13,7 +13,6 @@ node('master') {
         println(env.ASD)
         println(env.MYSQL_PASSWORD)
     }
-    pipeline {
         stage('checkout') {
             println(env.ASD)
             println(env.MYSQL_PASSWORD)
@@ -46,5 +45,4 @@ node('master') {
                 archiveArtifacts artifacts: reportPath, followSymlinks: false
             }
         }
-    }
 }
