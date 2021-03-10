@@ -4,9 +4,9 @@ node('master') {
         string(credentialsId: 'mysql_user', variable: 'mysql_user'),
         string(credentialsId: 'mysql_password', variable: 'mysql_password'),
     ]) {
-        MYSQL_ROOT_PASSWORD =   $mysql_root_password
-        MYSQL_USER =            $mysql_user
-        MYSQL_PASSWORD =        $mysql_password
+        MYSQL_ROOT_PASSWORD =   mysql_root_password
+        MYSQL_USER =            mysql_user
+        MYSQL_PASSWORD =        mysql_password
     }
     stage('checkout') {
         git branch: 'main', credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
