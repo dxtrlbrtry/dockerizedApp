@@ -1,5 +1,5 @@
 FROM node:15.11.0-alpine3.10
-WORKDIR /usr/src/app
+WORKDIR /app
 ARG MYSQL_DATABASE
 ARG MYSQL_USER
 ARG MYSQL_PASSWORD
@@ -26,6 +26,5 @@ RUN apk update && apk add --no-cache nmap && \
 RUN npm install
 COPY lib lib
 COPY tests tests
-COPY .testcaferc.json .
 WORKDIR /
-CMD ["bin/sh"]
+CMD ["/bin/sh"]

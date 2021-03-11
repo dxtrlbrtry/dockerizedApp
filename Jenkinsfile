@@ -20,18 +20,19 @@ node('master') {
             def reportPath = 'tests/reports/report.json'
             try {
                 stage('run tests') {
+                    bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js'
                     //bat 'docker exec -t testpipeline_app_1 /bin/sh -c "node tests/testRunner.js"'
-                    //bat "docker cp testpipeline_app_1:/usr/src/app/" + reportPath + " " + reportPath
+                    bat "docker cp testpipeline_tests_1:/app/" + reportPath + " " + reportPath
 //
-                    //def jsonReport = readJSON file: reportPath
-                    //for (fixture in jsonReport.fixtures) {
-                    //    for (test in fixture.tests) {
-                    //        for (error in test.errs) {
-                    //            echo error
-                    //            currentBuild.result = 'UNSTABLE'
-                    //        }
-                    //    }
-                    //}
+                    def jsonReport = readJSON file: reportPath
+                    for (fixture in jsonReport.fixtures) {
+                        for (test in fixture.tests) {
+                            for (error in test.errs) {
+                                echo error
+                                currentBuild.result = 'UNSTABLE'
+                            }
+                        }
+                    }
                 }
             }
             finally {
