@@ -12,7 +12,9 @@ ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
 ENV APP_HOST=${APP_HOST}
 ENV APP_PORT=${APP_PORT}
 ENV DB_HOST=${DB_HOST}
-COPY package*.json ./
+COPY lib lib
+COPY tests tests
+COPY .testcaferc.json .
 RUN apk update && apk add --no-cache nmap && \
     echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
     echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
@@ -24,8 +26,5 @@ RUN apk update && apk add --no-cache nmap && \
     ttf-freefont \
     nss
 RUN npm install
-COPY lib lib
-COPY tests tests
-COPY .testcaferc.json .
 WORKDIR /
 CMD ["/bin/sh"]
