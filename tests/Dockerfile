@@ -15,6 +15,9 @@ ENV DB_HOST=${DB_HOST}
 COPY lib lib
 COPY tests tests
 COPY .testcaferc.json .
+RUN mv /app/tests/package.json /app/package.json
+RUN mv /app/tests/package-lock.json /app/package-lock.json
+RUN npm install
 RUN apk update && apk add --no-cache nmap && \
     echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
     echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
@@ -25,7 +28,5 @@ RUN apk update && apk add --no-cache nmap && \
     "freetype>2.8" \
     ttf-freefont \
     nss
-WORKDIR /app/tests
-RUN npm install
 WORKDIR /
 CMD ["/bin/sh"]
