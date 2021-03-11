@@ -25,6 +25,7 @@ RUN apk update && apk add --no-cache nmap && \
     "freetype>2.8" \
     ttf-freefont \
     nss
+WORKDIR /tests
 RUN npm install
 WORKDIR /
 CMD ["/bin/sh"]
