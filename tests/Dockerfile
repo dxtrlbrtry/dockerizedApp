@@ -26,6 +26,6 @@ RUN apk update && apk add --no-cache nmap && \
 RUN npm install
 COPY lib lib
 COPY tests tests
-COPY .testcaferc.json .
 WORKDIR /
+COPY .testcaferc.json .
 CMD ["bin/sh"]
