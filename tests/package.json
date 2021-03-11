@@ -1,17 +1,15 @@
 {
-  "name": "dockerproject",
+  "name": "tests",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "testRunner.js",
   "scripts": {
-    "build": "redeploy.bat",
-    "test": "node tests/testRunner.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@mysql/xdevapi": "^8.0.23",
-    "express": "^4.17.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "testcafe": "^1.12.0"

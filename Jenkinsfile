@@ -8,7 +8,7 @@ node('master') {
         'MYSQL_PASSWORD=' + env.MYSQL_PASSWORD, 
         'MYSQL_ROOT_PASSWORD=' + env.MYSQL_ROOT_PASSWORD]) {   
             stage('checkout') {
-                    git branch: params.BRANCH, credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
+                git branch: params.BRANCH, credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
             }
             stage('rebuild app') {
                 bat "docker-compose build app"
@@ -16,18 +16,13 @@ node('master') {
                 bat "docker-compose up -d"
                 bat "docker image prune -a -f"
             }
-            def reportPath = '/tests/reports/'
+            def reportPath = 'tests/reports/report.json'
             try {
                 stage('run tests') {
-                    bat 'docker run --rm -d --network testpipeline_default -v "' + pwd() + reportPath + '":"/usr/src/app' + reportPath + '" tests node tests/testRunner.js'
-                    //bat 'docker exec -t testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js"'
-                    //docker.image('testpipeline_tests_1').inside('-v "' + pwd() + reportPath + '":"/usr/src/app/' + reportPath + '"') {
-                    //    sh 'ls'
-                    //    sh 'node tests/testRunner.js'
-                    //}
-                    //bat "docker cp testpipeline_app_1:/usr/src/app/" + reportPath + " " + reportPath
+                    bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js'
+                    bat "docker cp testpipeline_tests_1:/app/" + reportPath + " " + reportPath
 
-                    def jsonReport = readJSON file: reportPath + 'report.json'
+                    def jsonReport = readJSON file: reportPath
                     for (fixture in jsonReport.fixtures) {
                         for (test in fixture.tests) {
                             for (error in test.errs) {
@@ -40,7 +35,7 @@ node('master') {
             }
             finally {
                 stage('archive') {
-                    archiveArtifacts artifacts: reportPath + '/**/*.*', followSymlinks: false
+                    archiveArtifacts artifacts: reportPath, followSymlinks: false
                 }
             }
         }
