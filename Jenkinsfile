@@ -5,10 +5,10 @@ node('master') {
             string(credentialsId: 'mysql_password', variable: 'MYSQL_PASSWORD')
     ]) {
         withEnv([
-            'MYSQL_DATABASE'= params.MYSQL_DATABASE
-            'APP_PORT'= params.APP_PORT
-            'APP_HOST'= params.APP_HOST
-            'DB_PORT'= params.DB_PORT
+            'MYSQL_DATABASE=' + params.MYSQL_DATABASE
+            'APP_PORT=' + params.APP_PORT
+            'APP_HOST='+ params.APP_HOST
+            'DB_PORT='+ params.DB_PORT
         ]) {   
             stage('checkout') {
                 git branch: params.BRANCH, credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
