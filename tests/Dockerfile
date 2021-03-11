@@ -15,6 +15,7 @@ ENV DB_HOST=${DB_HOST}
 COPY lib lib
 COPY tests tests
 COPY .testcaferc.json .
+RUN mv /app/tests/.testcaferc.json /app/.testcaferc.json
 RUN mv /app/tests/package.json /app/package.json
 RUN mv /app/tests/package-lock.json /app/package-lock.json
 RUN npm install
