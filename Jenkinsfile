@@ -11,8 +11,12 @@ node('master') {
                 git branch: params.BRANCH, credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
             }
             stage('rebuild app') {
-                bat "docker-compose build app"
-                bat "docker-compose build tests"
+                if (params.REBUILD_APP) {
+                    bat "docker-compose build app"
+                }
+                if (params.REBUILD_TESTS) {
+                    bat "docker-compose build tests"
+                }
                 bat "docker-compose up -d"
                 bat "docker image prune -a -f"
             }
