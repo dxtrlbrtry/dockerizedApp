@@ -27,3 +27,5 @@ RUN npm install
 COPY lib lib
 COPY tests tests
 COPY .testcaferc.json .
+WORKDIR /
+CMD ["bin/sh"]
