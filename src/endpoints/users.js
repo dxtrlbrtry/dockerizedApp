@@ -1,7 +1,6 @@
 const db = require('../../lib/dbService')
 const schemas = db.schemas;
-const Logger = require('../../lib/logger').Logger
-var logger = new Logger(module.filename)
+const logger = require('../../lib/logger')
 
 exports.getUsers = function(req, res) {
   logger.log(`GET request received at /users/`)

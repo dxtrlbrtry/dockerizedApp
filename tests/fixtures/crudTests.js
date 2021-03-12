@@ -1,8 +1,7 @@
 const apiService = require('../apiService');
 const dbService = require('../../lib/dbService');
+const logger = require('../../lib/logger')
 const schemas = dbService.schemas;
-const Logger = require('../../lib/logger').Logger
-var logger = new Logger(module.filename)
 
 fixture`GetTest`
     .beforeEach(t => {

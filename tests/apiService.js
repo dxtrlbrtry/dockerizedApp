@@ -1,7 +1,6 @@
 const request = require('request-promise');
 const schemas = require('../lib/dbService').schemas;
-var Logger = require('../lib/logger').Logger;
-var logger = new Logger(module.filename)
+const logger = require('../lib/logger');
 
 const baseUrl = 'http://' + process.env.APP_HOST + ':' + process.env.APP_PORT;
 
