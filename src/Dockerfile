@@ -1,5 +1,4 @@
 FROM node:15.11.0-alpine3.10
-WORKDIR /app
-RUN mv ./src/package.json ./package.json
+WORKDIR /app/src
 RUN npm install
-CMD [ "node", "src/app.js" ]
+CMD [ "node", "app.js" ]
