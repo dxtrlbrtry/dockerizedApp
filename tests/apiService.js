@@ -5,6 +5,7 @@ const logger = require('../lib/logger');
 const baseUrl = 'http://' + process.env.APP_HOST + ':' + process.env.APP_PORT;
 
 async function sendRequest(options) {
+  logger.log(`Sending request ${JSON.stringify(options)}`)
   return await request(options)
     .then(resp => {
       logger.log(`Received response ${JSON.stringify(resp)}`)
@@ -14,8 +15,8 @@ async function sendRequest(options) {
 
 exports.createTable = async function(schema) {
   let endpoint =
-    schema == schema.user ? 'admin/usersTable/' :
-    schema == schema.testObject ? 'admin/testTable/' : '';
+    schema == schemas.user ? 'admin/usersTable/' :
+    schema == schemas.testObject ? 'admin/testTable/' : '';
   return await sendRequest({
     method: 'POST',
     url: baseUrl + '/' + endpoint,
@@ -26,8 +27,8 @@ exports.createTable = async function(schema) {
 
 exports.deleteTable = async function(schema) {
   let endpoint =
-    schema == schema.user ? 'admin/usersTable/' :
-    schema == schema.testObject ? 'admin/testTable/' : '';
+    schema == schemas.user ? 'admin/usersTable/' :
+    schema == schemas.testObject ? 'admin/testTable/' : '';
   return await sendRequest({
     method: 'DELETE',
     url: baseUrl + '/' + endpoint,
