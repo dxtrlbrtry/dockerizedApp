@@ -1,8 +1,7 @@
 const mysqlx = require('@mysql/xdevapi');
-const logger = require('./logger');
+const logger = require('../lib/logger');
 
-var schemas = require('./schemas');
-exports.schemas = schemas;
+const schemas = require('../lib/schemas');
 
 async function createSession() {
   logger.log('Requesting DB session');

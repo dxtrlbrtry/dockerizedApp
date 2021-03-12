@@ -1,5 +1,5 @@
-const db = require('../../lib/dbService')
-const schemas = db.schemas;
+const db = require('../dbService')
+const schemas = require('../../lib/schemas')
 const logger = require('../../lib/logger')
 
 exports.getUsers = function(req, res) {

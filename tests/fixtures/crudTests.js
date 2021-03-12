@@ -1,7 +1,6 @@
 const apiService = require('../apiService');
-const dbService = require('../../lib/dbService');
+const schemas = require('../../lib/schemas');
 const logger = require('../../lib/logger')
-const schemas = dbService.schemas;
 
 fixture`GetTest`
     .beforeEach(t => {
@@ -51,7 +50,7 @@ test('CRUD user tests', async t => {
         });
 })
 
-test.after(async () => await dbService.dropTable(schemas.testObject))
+test.after(async () => await apiService.deleteTable(schemas.testObject))
     ('CRUD testObject tests', async t => {
 
     await apiService.getAll(schemas.testObject)
@@ -60,7 +59,7 @@ test.after(async () => await dbService.dropTable(schemas.testObject))
             logger.log('Inexistent database error handling validated')
         })
 
-    await dbService.createTable(schemas.testObject)
+    await apiService.createTable(schemas.testObject)
 
     var testObject1 = { prop1: "testprop11", prop2: "testprop12" };
     var testObject2 = { prop1: "testprop21", prop2: "testprop22" };
