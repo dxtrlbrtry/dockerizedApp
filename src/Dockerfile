@@ -1,4 +1,4 @@
-FROM node:15.11.0-buster-slim
+FROM node:15.11.0-alpine3.10
 WORKDIR /app
 COPY lib lib
 COPY src src
