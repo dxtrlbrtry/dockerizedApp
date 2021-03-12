@@ -1,7 +1,6 @@
 'use strict';
 
-const Logger = require('../lib/logger').Logger
-var logger = new Logger(module.filename);
+const logger = require('../lib/logger')
 
 const user = require('./endpoints/users');
 const testObject = require('./endpoints/testObjects');
