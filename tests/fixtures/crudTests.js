@@ -1,6 +1,6 @@
 const apiService = require('../apiService');
-const schemas = require('../../lib/schemas');
-const logger = require('../../lib/logger')
+const schemas = require('../../common/schemas');
+const logger = require('../../common/logger')
 
 fixture`GetTest`
     .beforeEach(t => {

@@ -1,6 +1,6 @@
 const db = require('../dbService')
-const schemas = require('../../lib/schemas')
-const logger = require('../../lib/logger')
+const schemas = require('../../common/schemas')
+const logger = require('../../common/logger')
 
 exports.createUsersTable = function(req, res) {
   logger.log(`POST request received at /admin/usersTable`)

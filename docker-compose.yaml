@@ -27,7 +27,7 @@ services:
       - ${APP_PORT}:${APP_PORT}
     volumes:
       - ./src:/app/src
-      - ./lib:/app/lib
+      - ./common:/app/common
     depends_on:
       - db
     stdin_open: true
@@ -47,7 +47,7 @@ services:
       LOGGING_LEVEL: ${LOGGING_LEVEL}
     volumes:
       - ./tests:/app/tests
-      - ./lib:/app/lib
+      - ./common:/app/common
     stdin_open: true
     tty: true
 volumes:
