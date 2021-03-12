@@ -15,11 +15,11 @@ async function sendRequest(options) {
 
 exports.createTable = async function(schema) {
   let endpoint =
-    schema == schemas.user ? 'admin/usersTable/' :
-    schema == schemas.testObject ? 'admin/testTable/' : '';
+    schema == schemas.user ? '/admin/usersTable/' :
+    schema == schemas.testObject ? '/admin/testTable/' : '';
   return await sendRequest({
     method: 'POST',
-    url: baseUrl + '/' + endpoint,
+    url: baseUrl + endpoint,
     json: false,
     resolveWithFullResponse: false
   });
@@ -27,11 +27,11 @@ exports.createTable = async function(schema) {
 
 exports.deleteTable = async function(schema) {
   let endpoint =
-    schema == schemas.user ? 'admin/usersTable/' :
-    schema == schemas.testObject ? 'admin/testTable/' : '';
+    schema == schemas.user ? '/admin/usersTable/' :
+    schema == schemas.testObject ? '/admin/testTable/' : '';
   return await sendRequest({
     method: 'DELETE',
-    url: baseUrl + '/' + endpoint,
+    url: baseUrl + endpoint,
     json: false,
     resolveWithFullResponse: false
   });
@@ -39,11 +39,11 @@ exports.deleteTable = async function(schema) {
 
 exports.getAll = async function (schema) {
   let endpoint =
-    schema == schemas.user ? 'users/' :
-    schema == schemas.testObject ? 'test/' : '';
+    schema == schemas.user ? '/users/' :
+    schema == schemas.testObject ? '/test/' : '';
   return await sendRequest({
     method: 'GET',
-    url: baseUrl + '/' + endpoint,
+    url: baseUrl + endpoint,
     json: false,
     resolveWithFullResponse: false
   });
@@ -51,11 +51,11 @@ exports.getAll = async function (schema) {
 
 exports.addItem = async function(schema, item) {
   let endpoint =
-    schema == schemas.user ? 'users/' :
-    schema == schemas.testObject ? 'test/' : '';
+    schema == schemas.user ? '/users/' :
+    schema == schemas.testObject ? '/test/' : '';
   return await sendRequest({
     method: 'POST',
-    url: baseUrl + '/' + endpoint,
+    url: baseUrl + endpoint,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
     json: false,
@@ -65,11 +65,11 @@ exports.addItem = async function(schema, item) {
 
 exports.deleteItem = async function(schema, item) {
   let endpoint =
-    schema == schemas.user ? 'users/' :
-    schema == schemas.testObject ? 'test/' : '';
+    schema == schemas.user ? '/users/' :
+    schema == schemas.testObject ? '/test/' : '';
   return await sendRequest({
     method: 'DELETE',
-    url: baseUrl + '/' + endpoint,
+    url: baseUrl +  endpoint,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
     json: false,
