@@ -10,6 +10,13 @@
     "test": "docker exec -w /app/ dockerizedapp_tests_1 /bin/sh -c \"node tests/testRunner.js\"",
     "deploy": "redeploy.bat"
   },
+  "dependencies": {
+    "request":"^2.88.2",
+    "request-promise":"^4.2.6",
+    "testcafe":"^1.12.0",
+    "@mysql/xdevali":"^8.0.23",
+    "express":"^4.17.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dxtrlbrtry/dockerizedApp.git"
