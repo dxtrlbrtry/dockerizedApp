@@ -42,7 +42,7 @@ node('master') {
             }
             finally {
                 stage('archive') {
-                    archiveArtifacts artifacts: reportPath, followSymlinks: false
+                    archiveArtifacts artifacts: 'tests/reports/report.json', followSymlinks: false
                 }
             }
         }
