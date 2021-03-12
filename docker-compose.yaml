@@ -50,6 +50,3 @@ services:
       - ./common:/app/common
     stdin_open: true
     tty: true
-volumes:
-  mysql-data:
-    driver: local
