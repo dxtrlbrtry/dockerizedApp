@@ -1,7 +1,7 @@
 FROM node:15.11.0-alpine3.10
 WORKDIR /app
-RUN mv /app/tests/.testcaferc.json /app/.testcaferc.json
-RUN mv /app/tests/package.json /app/package.json
+RUN mv ./tests/.testcaferc.json ./.testcaferc.json
+RUN mv ./tests/package.json ./package.json
 RUN npm install
 RUN apk update && \
     apk add --no-cache \
