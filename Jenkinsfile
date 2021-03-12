@@ -25,13 +25,11 @@ node('master') {
                 bat "docker-compose up -d"
                 bat "docker image prune -a -f"
             }
-            def reportPath = 'tests/reports/report.json'
             try {
                 stage('run tests') {
                     bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js'
-                    //bat "docker cp testpipeline_tests_1:/app/" + reportPath + " " + reportPath
 
-                    def jsonReport = readJSON file: reportPath
+                    def jsonReport = readJSON file: 'tests/reports/report.json'
                     for (fixture in jsonReport.fixtures) {
                         for (test in fixture.tests) {
                             for (error in test.errs) {

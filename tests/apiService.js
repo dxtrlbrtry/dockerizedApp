@@ -13,34 +13,7 @@ async function sendRequest(options) {
     }).catch(err => logger.error(err));
 }
 
-exports.createTable = async function(schema) {
-  let endpoint =
-    schema == schemas.user ? '/admin/usersTable/' :
-    schema == schemas.testObject ? '/admin/testTable/' : '';
-  return await sendRequest({
-    method: 'POST',
-    url: baseUrl + endpoint,
-    json: false,
-    resolveWithFullResponse: false
-  });
-}
-
-exports.deleteTable = async function(schema) {
-  let endpoint =
-    schema == schemas.user ? '/admin/usersTable/' :
-    schema == schemas.testObject ? '/admin/testTable/' : '';
-  return await sendRequest({
-    method: 'DELETE',
-    url: baseUrl + endpoint,
-    json: false,
-    resolveWithFullResponse: false
-  });
-}
-
-exports.getAll = async function (schema) {
-  let endpoint =
-    schema == schemas.user ? '/users/' :
-    schema == schemas.testObject ? '/test/' : '';
+exports.get = async function (endpoint) {
   return await sendRequest({
     method: 'GET',
     url: baseUrl + endpoint,
@@ -49,29 +22,23 @@ exports.getAll = async function (schema) {
   });
 }
 
-exports.addItem = async function(schema, item) {
-  let endpoint =
-    schema == schemas.user ? '/users/' :
-    schema == schemas.testObject ? '/test/' : '';
+exports.post = async function(endpoint, body) {
   return await sendRequest({
     method: 'POST',
     url: baseUrl + endpoint,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(item),
+    body: JSON.stringify(body),
     json: false,
     resolveWithFullResponse: false
   });
 }
 
-exports.deleteItem = async function(schema, item) {
-  let endpoint =
-    schema == schemas.user ? '/users/' :
-    schema == schemas.testObject ? '/test/' : '';
+exports.delete = async function(endpoint, body) {
   return await sendRequest({
     method: 'DELETE',
     url: baseUrl +  endpoint,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(item),
+    body: JSON.stringify(body),
     json: false,
     resolveWithFullResponse: false
   });

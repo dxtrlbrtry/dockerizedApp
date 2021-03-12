@@ -10,25 +10,25 @@ fixture`GetTest`
 
 test('CRUD user tests', async t => {
     var user = { name: 'Alex' };
-    await apiService.getAll(schemas.user)
+    await apiService.get('/users/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result.some(u => u.name == user.name)).notOk();
             logger.log('get successful')
         });
 
-    await apiService.addItem(schemas.user, user)
+    await apiService.post('/users/', user)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202);
             logger.log('add successful')
         });
-    await apiService.addItem(schemas.user, user)
+    await apiService.post('/users/', user)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202)
             logger.log('add successful')
         });
 
-    await apiService.getAll(schemas.user)
+    await apiService.get('/users/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result.some(u => u.name == user.name)).ok()
@@ -36,13 +36,13 @@ test('CRUD user tests', async t => {
             logger.log('get successful')
         })
 
-    await apiService.deleteItem(schemas.user, user)
+    await apiService.delete('/users/', user)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200);
             logger.log('delete successful')
         })
 
-    await apiService.getAll(schemas.user)
+    await apiService.get('/users/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result.some(u => u.name == user.name)).notOk();
@@ -50,40 +50,40 @@ test('CRUD user tests', async t => {
         });
 })
 
-test.after(async () => await apiService.deleteTable(schemas.testObject))
+test.after(async () => await apiService.delete('/admin/testTable/'))
     ('CRUD testObject tests', async t => {
 
-    await apiService.getAll(schemas.testObject)
+    await apiService.get('/users/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(400)
             logger.log('Inexistent database error handling validated')
         })
 
-    await apiService.createTable(schemas.testObject)
+    await apiService.post('/admin/testTable/')
 
     var testObject1 = { prop1: "testprop11", prop2: "testprop12" };
     var testObject2 = { prop1: "testprop21", prop2: "testprop22" };
 
     
-    await apiService.getAll(schemas.testObject)
+    await apiService.get('/users/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result == 0).ok();
             logger.log('empty db validated')
         });
 
-    await apiService.addItem(schemas.testObject, testObject1)
+    await apiService.post('/users/', testObject1)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202)
             logger.log('objects added')
         });
-    await apiService.addItem(schemas.testObject, testObject2)
+    await apiService.post('/users/', testObject2)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202)
             logger.log('objects added')
         });
 
-    await apiService.getAll(schemas.testObject)
+    await apiService.get('/users/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result.some(o => o.prop1 == testObject1.prop1 && o.prop2 == testObject1.prop2)).ok()
@@ -91,18 +91,18 @@ test.after(async () => await apiService.deleteTable(schemas.testObject))
             logger.log('added objects validated')
         });
 
-    await apiService.deleteItem(schemas.testObject, testObject1)
+    await apiService.delete('/test/', testObject1)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
             logger.log('objects deleted')
         });
-    await apiService.deleteItem(schemas.testObject, testObject2)
+    await apiService.delete('/test/', testObject2)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
             logger.log('objects deleted')
         });
 
-    await apiService.getAll(schemas.testObject)
+    await apiService.get('/users/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result == 0).ok();
