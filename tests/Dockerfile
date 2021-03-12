@@ -1,7 +1,5 @@
 FROM node:15.11.0-alpine3.10
 WORKDIR /app
-COPY lib lib
-COPY tests tests
 RUN mv /app/tests/.testcaferc.json /app/.testcaferc.json
 RUN mv /app/tests/package.json /app/package.json
 RUN npm install

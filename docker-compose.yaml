@@ -25,6 +25,9 @@ services:
       LOGGING_LEVEL: ${LOGGING_LEVEL}
     ports:
       - ${APP_PORT}:${APP_PORT}
+    volumes:
+      - /src:/app/src
+      - /lib:/app/lib
     depends_on:
       - db
     stdin_open: true
@@ -42,6 +45,9 @@ services:
       APP_PORT: ${APP_PORT}
       DB_HOST: db
       LOGGING_LEVEL: ${LOGGING_LEVEL}
+    volumes:
+      - /tests:/app/tests
+      - /lib:/app/lib
     stdin_open: true
     tty: true
 volumes:
