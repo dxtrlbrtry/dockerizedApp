@@ -1,5 +1,8 @@
 'use strict';
 
+const Logger = require('../lib/logger').Logger
+var logger = new Logger(module.filename);
+
 const user = require('./endpoints/users');
 const testObject = require('./endpoints/testObjects');
 
@@ -17,4 +20,4 @@ app.post('/test', testObject.addObject);
 app.delete('/test/', testObject.deleteObject)
 
 app.listen(process.env.APP_PORT, process.env.APP_HOST);
-console.log('Running on http://' + process.env.APP_HOST + ':' + process.env.APP_PORT);
+logger.log('Running on http://' + process.env.APP_HOST + ':' + process.env.APP_PORT);
