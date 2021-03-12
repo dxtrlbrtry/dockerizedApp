@@ -53,6 +53,13 @@ test('CRUD user tests', async t => {
 
 test.after(async () => await dbService.dropTable(schemas.testObject))
     ('CRUD testObject tests', async t => {
+
+    await apiService.getAll(schemas.testObject)
+        .then(async resp => {
+            await t.expect(resp.statusCode).eql(400)
+            logger.log('Inexistent database error handling validated')
+        })
+
     await dbService.createTable(schemas.testObject)
 
     var testObject1 = { prop1: "testprop11", prop2: "testprop12" };
