@@ -5,6 +5,7 @@ const logger = require('../lib/logger');
 const baseUrl = 'http://' + process.env.APP_HOST + ':' + process.env.APP_PORT;
 
 async function sendRequest(options) {
+  logger.log('dont rebuild me lol')
   logger.log(`Sending request ${JSON.stringify(options)}`)
   return await request(options)
     .then(resp => {
