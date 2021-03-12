@@ -24,7 +24,7 @@ exports.createTestTable = function(req, res) {
 
 exports.deleteUsersTable = function(req, res) {
   logger.log(`DELETE request received at /admin/usersTable`)
-  db.createTable(schemas.user)
+  db.deleteUsersTable(schemas.user)
     .then(result => res.send({ statusCode: 200, result: result }))
     .catch(err => {
       logger.error(err);
@@ -34,7 +34,7 @@ exports.deleteUsersTable = function(req, res) {
     
 exports.deleteTestTable = function(req, res) {
   logger.log(`DELETE request received at /admin/testTable`)
-  db.createTable(schemas.testObject)
+  db.deleteTestTable(schemas.testObject)
     .then(result => res.send({ statusCode: 200, result: result }))
     .catch(err => {
       logger.error(err);
