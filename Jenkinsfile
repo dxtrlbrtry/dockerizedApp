@@ -9,7 +9,8 @@ node('master') {
             'APP_PORT=' + params.APP_PORT,
             'APP_HOST='+ params.APP_HOST,
             'DB_PORT='+ params.DB_PORT,
-            'DATA_STORAGE_PATH=' + params.DATA_STORAGE_PATH
+            'DATA_STORAGE_PATH=' + params.DATA_STORAGE_PATH,
+            'LOGGING_LEVEL=' + params.LOGGING_LEVEL
         ]) {   
             stage('checkout') {
                 git branch: params.BRANCH, credentialsId: 'git_credentials', url: 'https://github.com/dxtrlbrtry/dockerizedApp.git'
