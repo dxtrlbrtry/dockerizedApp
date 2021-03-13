@@ -9,3 +9,4 @@ RUN npm install
 RUN apk update && \
     apk add --no-cache \
     chromium
+CMD ["node", "tests/bin/run.js"]
