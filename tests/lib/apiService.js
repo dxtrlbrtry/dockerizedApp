@@ -1,6 +1,5 @@
 const request = require('request-promise');
-const schemas = require('../common/schemas');
-const logger = require('../common/logger');
+const logger = require('./logger');
 
 const baseUrl = 'http://' + process.env.APP_HOST + ':' + process.env.APP_PORT;
 

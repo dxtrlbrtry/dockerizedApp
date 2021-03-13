@@ -13,7 +13,7 @@ services:
     image: web-app
     build:
       context: .
-      dockerfile: ./src/Dockerfile
+      dockerfile: ./webapp/Dockerfile
     restart: always
     environment:      
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -26,8 +26,9 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
     volumes:
-      - ./src:/app/src
-      - ./common:/app/common
+      - ./webapp/endpoints:/app/webapp/endpoints
+      - ./webapp/lib:/app/webapp/lib
+      - ./webapp/src:/app/webapp/src
     depends_on:
       - db
     stdin_open: true
@@ -46,7 +47,8 @@ services:
       DB_HOST: db
       LOGGING_LEVEL: ${LOGGING_LEVEL}
     volumes:
-      - ./tests:/app/tests
-      - ./common:/app/common
+      - ./tests/fixtures:/app/tests/fixtures
+      - ./tests/lib:/app/tests/lib
+      - ./tests/src:/app/tests/src
     stdin_open: true
     tty: true

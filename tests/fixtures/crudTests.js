@@ -1,6 +1,6 @@
-const apiService = require('../apiService');
-const schemas = require('../../common/schemas');
-const logger = require('../../common/logger')
+const apiService = require('../lib/apiService');
+const schemas = require('../lib/schemas');
+const logger = require('../lib/logger')
 
 fixture`GetTest`
     .beforeEach(t => {
@@ -53,7 +53,7 @@ test('CRUD user tests', async t => {
 test.after(async () => await apiService.delete('/admin/testTable/'))
     ('CRUD testObject tests', async t => {
 
-    await apiService.get('/users/')
+    await apiService.get('/test/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(400)
             logger.log('Inexistent database error handling validated')
@@ -65,25 +65,25 @@ test.after(async () => await apiService.delete('/admin/testTable/'))
     var testObject2 = { prop1: "testprop21", prop2: "testprop22" };
 
     
-    await apiService.get('/users/')
+    await apiService.get('/test/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result == 0).ok();
             logger.log('empty db validated')
         });
 
-    await apiService.post('/users/', testObject1)
+    await apiService.post('/test/', testObject1)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202)
             logger.log('objects added')
         });
-    await apiService.post('/users/', testObject2)
+    await apiService.post('/test/', testObject2)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202)
             logger.log('objects added')
         });
 
-    await apiService.get('/users/')
+    await apiService.get('/test/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result.some(o => o.prop1 == testObject1.prop1 && o.prop2 == testObject1.prop2)).ok()
@@ -102,7 +102,7 @@ test.after(async () => await apiService.delete('/admin/testTable/'))
             logger.log('objects deleted')
         });
 
-    await apiService.get('/users/')
+    await apiService.get('/test/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(resp.result == 0).ok();

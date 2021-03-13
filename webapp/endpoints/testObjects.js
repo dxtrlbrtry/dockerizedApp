@@ -1,10 +1,9 @@
-const db = require('../dbService');
-const schemas = require('../../common/schemas')
-const logger = require('../../common/logger')
+const db = require('../lib/dbService');
+const logger = require('../lib/logger')
 
 exports.getObjects = function(req, res) {
   logger.log(`GET request received at /test/`)
-  db.getTable(schemas.testObject)
+  db.getTable(db.tables.TESTOBJECT)
     .then(result => res.send({ statusCode: 200, result: result }))
     .catch(err => {
       logger.error(err);
@@ -14,7 +13,7 @@ exports.getObjects = function(req, res) {
   
 exports.addObject = function(req, res) {
   logger.log(`POST request received at /test/`)
-  db.insertItem(schemas.testObject, req.body)
+  db.insertItem(db.tables.TESTOBJECT, req.body)
     .then(result =>  res.send({ statusCode: 202, result: result }))
     .catch(err => {
       logger.error(err);
@@ -24,7 +23,7 @@ exports.addObject = function(req, res) {
   
 exports.deleteObject = function(req, res) {
   logger.log(`DELETE request received at /test/`)
-  db.deleteItem(schemas.testObject, req.body)
+  db.deleteItem(db.tables.TESTOBJECT, req.body)
     .then(result => res.send({ statusCode: 200, result: result })) 
     .catch(err => {
       logger.error(err);

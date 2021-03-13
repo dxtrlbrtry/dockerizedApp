@@ -27,9 +27,9 @@ node('master') {
             }
             try {
                 stage('run tests') {
-                    bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/testRunner.js'
+                    bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/src/run.js'
 
-                    def jsonReport = readJSON file: 'tests/reports/report.json'
+                    def jsonReport = readJSON file: 'tests/fixtures/reports/report.json'
                     for (fixture in jsonReport.fixtures) {
                         for (test in fixture.tests) {
                             for (error in test.errs) {
@@ -42,7 +42,7 @@ node('master') {
             }
             finally {
                 stage('archive') {
-                    archiveArtifacts artifacts: 'tests/reports/report.json', followSymlinks: false
+                    archiveArtifacts artifacts: 'tests/fixtures/reports/report.json', followSymlinks: false
                 }
             }
         }

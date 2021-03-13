@@ -1,6 +1,10 @@
 FROM node:15.11.0-alpine3.10
 WORKDIR /app
-COPY /app/tests/package.json /app/package.json
+COPY tests/package.json .
+COPY tests/.testcaferc.json .
+COPY tests/fixtures /fixtures/
+COPY tests/lib /lib/
+COPY tests/src /src/
 RUN npm install
 RUN apk update && \
     apk add --no-cache \
