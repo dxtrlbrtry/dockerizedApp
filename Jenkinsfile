@@ -29,7 +29,8 @@ node('master') {
             }
             try {
                 stage('run tests') {
-                    bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/bin/run.js'
+                    //bat 'docker run -w /app/ '
+                    //bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/bin/run.js'
 
                     def jsonReport = readJSON file: 'tests/fixtures/reports/report.json'
                     for (fixture in jsonReport.fixtures) {

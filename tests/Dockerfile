@@ -8,6 +8,4 @@ COPY tests/bin /bin/
 RUN npm install
 RUN apk update && \
     apk add --no-cache \
-    chromium 
-WORKDIR /
-CMD ["/bin/sh"]
+    chromium
