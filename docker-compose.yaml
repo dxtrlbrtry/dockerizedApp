@@ -28,7 +28,7 @@ services:
     volumes:
       - ./webapp/endpoints:/app/webapp/endpoints
       - ./webapp/lib:/app/webapp/lib
-      - ./webapp/src:/app/webapp/src
+      - ./webapp/bin:/app/webapp/bin
     depends_on:
       - db
     stdin_open: true
@@ -49,6 +49,6 @@ services:
     volumes:
       - ./tests/fixtures:/app/tests/fixtures
       - ./tests/lib:/app/tests/lib
-      - ./tests/src:/app/tests/src
+      - ./tests/bin:/app/tests/bin
     stdin_open: true
     tty: true

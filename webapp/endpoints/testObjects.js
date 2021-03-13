@@ -1,7 +1,8 @@
 const db = require('../lib/dbService');
-const logger = require('../lib/logger')
+const logger = require('../lib/logger');
+const app = require('../bin/app');
 
-exports.getObjects = function(req, res) {
+app.get('/test', function(req, res) {
   logger.log(`GET request received at /test/`)
   db.getTable(db.tables.TESTOBJECT)
     .then(result => res.send({ statusCode: 200, result: result }))
@@ -9,9 +10,9 @@ exports.getObjects = function(req, res) {
       logger.error(err);
       res.send({ statusCode: 400, 'error: ': err });
     })
-  };
+});
   
-exports.addObject = function(req, res) {
+app.post('/test/', function(req, res) {
   logger.log(`POST request received at /test/`)
   db.insertItem(db.tables.TESTOBJECT, req.body)
     .then(result =>  res.send({ statusCode: 202, result: result }))
@@ -19,9 +20,9 @@ exports.addObject = function(req, res) {
       logger.error(err);
       res.send({ statusCode: 400, 'error: ': err });
     })
-  }
+});
   
-exports.deleteObject = function(req, res) {
+app.delete('test', function(req, res) {
   logger.log(`DELETE request received at /test/`)
   db.deleteItem(db.tables.TESTOBJECT, req.body)
     .then(result => res.send({ statusCode: 200, result: result })) 
@@ -29,4 +30,4 @@ exports.deleteObject = function(req, res) {
       logger.error(err);
       res.send({ statusCode: 400, 'error: ': err });
     })
-  }
+});

@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "docker exec -w /app/ dockerizedapp_tests_1 /bin/sh -c \"node tests/src/run.js\"",
+    "test": "docker exec -w /app/ dockerizedapp_tests_1 /bin/sh -c \"node tests/bin/run.js\"",
     "deploy": "redeploy.bat"
   },
   "repository": {

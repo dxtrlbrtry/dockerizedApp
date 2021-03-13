@@ -3,6 +3,6 @@ WORKDIR /app
 COPY webapp/package.json .
 COPY webapp/endpoints /endpoints/
 COPY webapp/lib /lib/
-COPY webapp/src /src/
+COPY webapp/bin /bin/
 RUN npm install
-CMD [ "node", "webapp/src/app.js" ]
+CMD [ "node", "webapp/bin/app.js" ]

@@ -4,7 +4,7 @@ COPY tests/package.json .
 COPY tests/.testcaferc.json .
 COPY tests/fixtures /fixtures/
 COPY tests/lib /lib/
-COPY tests/src /src/
+COPY tests/bin /bin/
 RUN npm install
 RUN apk update && \
     apk add --no-cache \

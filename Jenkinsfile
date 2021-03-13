@@ -17,9 +17,11 @@ node('master') {
             }
             stage('rebuild app') {
                 if (params.REBUILD_APP) {
+                    bat "docker-compose stop -f app"
                     bat "docker-compose build app"
                 }
                 if (params.REBUILD_TESTS) {
+                    bat "docker-compose stop -f tests"
                     bat "docker-compose build tests"
                 }
                 bat "docker-compose up -d"
@@ -27,7 +29,7 @@ node('master') {
             }
             try {
                 stage('run tests') {
-                    bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/src/run.js'
+                    bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/bin/run.js'
 
                     def jsonReport = readJSON file: 'tests/fixtures/reports/report.json'
                     for (fixture in jsonReport.fixtures) {
