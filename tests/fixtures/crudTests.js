@@ -2,9 +2,9 @@ const apiService = require('../lib/apiService');
 const schemas = require('../lib/schemas');
 const logger = require('../lib/logger')
 
-fixture`GetTest`
+fixture`Smoke Test`
     .beforeEach(t => {
-        logger.log("Running test: " + t.testRun.test.name)
+        logger.log("Test build - Running test: " + t.testRun.test.name)
     })
     .after(() => logger.log('All tests finished'))
 
