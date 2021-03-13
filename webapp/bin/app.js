@@ -11,6 +11,9 @@ const app = express();
 
 app.use(express.json());
 
+app.get('/users/', user.getUsers);
+app.post('/users/', user.addUser);
+app.delete('/users/', user.deleteUser);
 
 app.post('/admin/usersTable/', admin.createUsersTable);
 app.post('/admin/testTable/', admin.createTestTable);
