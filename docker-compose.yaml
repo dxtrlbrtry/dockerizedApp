@@ -50,5 +50,3 @@ services:
       - ./tests/fixtures:/app/tests/fixtures
       - ./tests/lib:/app/tests/lib
       - ./tests/bin:/app/tests/bin
-    stdin_open: true
-    tty: true
