@@ -29,6 +29,7 @@ node('master') {
             }
             try {
                 stage('run tests') {
+                    bat 'docker start testpipeline_tests_1'
                     //bat 'docker run -w /app/ '
                     //bat 'docker exec -w /app/ testpipeline_tests_1 /bin/sh -c "node tests/bin/run.js'
 
