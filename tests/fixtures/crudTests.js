@@ -4,7 +4,7 @@ const logger = require('../lib/logger')
 
 fixture`Smoke Test`
     .beforeEach(t => {
-        logger.log("Test build - Running test: " + t.testRun.test.name)
+        logger.log("Running test: " + t.testRun.test.name)
     })
     .after(() => logger.log('All tests finished'))
 
