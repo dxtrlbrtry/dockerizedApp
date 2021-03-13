@@ -39,12 +39,8 @@ services:
       context: .
       dockerfile: ./tests/Dockerfile
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       APP_HOST: app
       APP_PORT: ${APP_PORT}
-      DB_HOST: db
       LOGGING_LEVEL: ${LOGGING_LEVEL}
     volumes:
       - ./tests/fixtures:/app/tests/fixtures

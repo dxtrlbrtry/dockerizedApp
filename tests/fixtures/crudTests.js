@@ -1,5 +1,4 @@
 const apiService = require('../lib/apiService');
-const schemas = require('../lib/schemas');
 const logger = require('../lib/logger')
 
 fixture`Smoke Test`
