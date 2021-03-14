@@ -32,7 +32,6 @@ node('master') {
                     bat "docker-compose up tests"
 
                     def jsonReport = readJSON file: 'tests/reports/report.json'
-                    println(jsonReport)
                     for (fixture in jsonReport.fixtures) {
                         for (test in fixture.tests) {
                             for (error in test.errs) {
