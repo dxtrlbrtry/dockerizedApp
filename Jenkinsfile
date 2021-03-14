@@ -26,7 +26,6 @@ node('master') {
                 }
                 bat "docker-compose up -d db"
                 bat "docker-compose up -d app"
-                bat "docker image prune -a -f"
             }
             try {
                 stage('run tests') {
