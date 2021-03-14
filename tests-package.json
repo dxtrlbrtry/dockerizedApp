@@ -8,6 +8,7 @@
   "dependencies": {
     "request":"^2.88.2",
     "request-promise":"^4.2.6",
-    "testcafe":"^1.12.0"
+    "testcafe":"^1.12.0",
+    "jsonschema": "^1.4.0"
   }
 }

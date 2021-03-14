@@ -112,7 +112,7 @@ exports.getTable = async function(table) {
         }
       }
     } catch (err) {
-      throw `Failed getting table for schema ${table}`
+      throw `Failed getting table for schema ${table} due to ${err}`
     } finally {
       session.close();
     }
@@ -145,8 +145,8 @@ exports.deleteItem = async function(table, item) {
 }
 
 function getQueryResult(res) {
-  var result = [];
   if (res.hasData()) {
+    var result = [];
     var columns = res.getColumns();
     var record = res.fetchOne();
     while (record) {
@@ -159,6 +159,7 @@ function getQueryResult(res) {
       result.push(item)
       record = res.fetchOne();
     }
+    return result;
   }    
-  return result;
+  return "Rows affected: " + res.getAffectedItemsCount();
 }

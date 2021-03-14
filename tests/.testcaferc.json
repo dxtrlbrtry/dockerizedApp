@@ -1,9 +1,14 @@
 {
     "browsers": "chromium:/usr/bin/chromium-browser:headless",
     "src": "tests/fixtures/",
-    "reporter": {
-        "name": "json",
-        "output": "tests/reports/report.json"
-    },
+    "reporter": [
+        {
+            "name": "spec"
+        },
+        {
+            "name": "json",
+            "output": "tests/reports/report.json"
+        }
+    ],
     "skipUncaughtErrors": true
 }
