@@ -3,6 +3,7 @@ WORKDIR /app
 COPY tests/package.json .
 COPY tests/.testcaferc.json .
 COPY tests ./tests
+COPY common  ./common
 RUN npm install
 RUN apk update && \
     apk add --no-cache \

@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require('./lib/logger')
+const logger = require('../common/logger')
 
 const admin = require('./endpoints/admin')
 const user = require('./endpoints/users');

@@ -1,5 +1,5 @@
 const apiService = require('../lib/apiService');
-const logger = require('../lib/logger')
+const logger = require('../../common/logger')
 
 fixture`Smoke Test`
     .beforeEach(t => {

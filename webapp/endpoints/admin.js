@@ -1,5 +1,5 @@
 const db = require('../lib/dbService')
-const logger = require('../lib/logger')
+const logger = require('../../common/logger')
 
 exports.createUsersTable = function(req, res) {
   logger.log(`POST request received at /admin/usersTable`)

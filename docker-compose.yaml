@@ -26,6 +26,7 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
     volumes:
+      - ./common/:/app/common/
       - ./webapp/endpoints/:/app/webapp/endpoints/
       - ./webapp/lib/:/app/webapp/lib/
       - ./webapp/app.js:/app/webapp/app.js
@@ -43,6 +44,7 @@ services:
       APP_PORT: ${APP_PORT}
       LOGGING_LEVEL: ${LOGGING_LEVEL}
     volumes:
+      - ./common/:/app/common/
       - ./tests/fixtures/:/app/tests/fixtures/
       - ./tests/lib/:/app/tests/lib/
       - ./tests/reports/:/app/tests/reports/

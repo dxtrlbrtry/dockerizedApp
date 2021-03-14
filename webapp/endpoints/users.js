@@ -1,5 +1,5 @@
 const db = require('../lib/dbService')
-const logger = require('../lib/logger')
+const logger = require('../../common/logger')
 
 exports.getUsers = function(req, res) {
   logger.log(`GET request received at /users/`)

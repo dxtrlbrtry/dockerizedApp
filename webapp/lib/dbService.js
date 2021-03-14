@@ -1,5 +1,5 @@
 const mysqlx = require('@mysql/xdevapi');
-const logger = require('./logger');
+const logger = require('../../common/logger');
 
 const tables = {
   USERS: 'users',
