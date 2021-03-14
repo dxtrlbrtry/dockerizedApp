@@ -2,10 +2,6 @@
   "name": "dockerizedapp",
   "version": "1.0.0",
   "description": "Javascript app and database communication from within different docker containers",
-  "directories": {
-    "lib": "lib",
-    "test": "tests"
-  },
   "scripts": {
     "test": "docker exec -w /app/ dockerizedapp_tests_1 /bin/sh -c \"node tests/bin/run.js\"",
     "deploy": "redeploy.bat"

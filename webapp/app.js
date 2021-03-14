@@ -26,5 +26,3 @@ app.delete('/test/', testObject.deleteObject)
 
 app.listen(process.env.APP_PORT, process.env.APP_HOST);
 logger.log('Running on http://' + process.env.APP_HOST + ':' + process.env.APP_PORT);
-
-module.exports = app;

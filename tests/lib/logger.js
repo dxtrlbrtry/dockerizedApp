@@ -1,7 +1,7 @@
 class Logger {
     log(message) {
         if (process.env.LOGGING_LEVEL <= 1) {
-            console.log(`${new Date().toISOString()} INFO: ${message}`)
+            console.log(`test quick build - ${new Date().toISOString()} INFO: ${message}`)
         }
     }
     
