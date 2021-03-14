@@ -28,7 +28,7 @@ services:
     volumes:
       - ./webapp/endpoints:/app/webapp/endpoints
       - ./webapp/lib:/app/webapp/lib
-      - ./webapp/bin:/app/webapp/bin
+      - ./webapp/app.js:/app/webapp/app,js
     depends_on:
       - db
     stdin_open: true

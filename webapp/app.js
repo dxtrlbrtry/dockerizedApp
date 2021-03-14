@@ -1,10 +1,10 @@
 'use strict';
 
-const logger = require('../lib/logger')
+const logger = require('./lib/logger')
 
-const admin = require('../endpoints/admin')
-const user = require('../endpoints/users');
-const testObject = require('../endpoints/testObjects');
+const admin = require('./endpoints/admin')
+const user = require('./endpoints/users');
+const testObject = require('./endpoints/testObjects');
 
 const express = require('express');
 const app = express();
