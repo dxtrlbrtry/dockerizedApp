@@ -45,4 +45,4 @@ services:
     volumes:
       - ./tests/fixtures:/app/tests/fixtures
       - ./tests/lib:/app/tests/lib
-      - ./tests/bin:/app/tests/bin
+      - ./tests/run.js:/app/tests/run.js
