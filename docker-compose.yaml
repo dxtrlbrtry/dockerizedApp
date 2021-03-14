@@ -13,7 +13,7 @@ services:
     image: web-app
     build:
       context: .
-      dockerfile: ./webapp/Dockerfile
+      dockerfile: ./webapp.Dockerfile
     restart: always
     environment:      
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -38,7 +38,7 @@ services:
     image: tests
     build:
       context: .
-      dockerfile: ./tests/Dockerfile
+      dockerfile: ./tests.Dockerfile
     environment:
       APP_HOST: app
       APP_PORT: ${APP_PORT}
