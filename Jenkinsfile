@@ -17,13 +17,11 @@ node('master') {
             }
             stage('rebuild app') {
                 if (params.REBUILD_APP) {
-                    bat "docker-compose stop -f app"
                     bat "docker-compose build app"
                 }
                 if (params.REBUILD_TESTS) {
                     bat "docker-compose build tests"
-                }
-                bat "docker-compose up -d db"
+                }                
                 bat "docker-compose up -d app"
                 bat "docker image prune -a -f"
             }
