@@ -4,9 +4,9 @@ COPY tests/package.json .
 COPY tests/.testcaferc.json .
 COPY tests/fixtures ./tests/fixtures/
 COPY tests/lib ./tests/lib/
-COPY tests/bin ./tests/run.js
+COPY tests/run.js ./tests/run.js
 RUN npm install
 RUN apk update && \
     apk add --no-cache \
     chromium
-CMD ["node", "tests/bin/run.js"]
+CMD ["node", "tests/run.js"]
