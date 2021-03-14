@@ -1,9 +1,9 @@
-const db = require('../lib/dbService')
+const { createTable, dropTable, tables } = require('../lib/dbService')
 const logger = require('../../common/logger')
 
 exports.createUsersTable = function(req, res) {
   logger.log(`POST request received at /admin/usersTable`)
-  db.createTable(db.tables.USERS)
+  createTable(tables.USERS)
     .then(result => res.send({ statusCode: 200, body: result }))
     .catch(err => {
       logger.error(err);
@@ -13,7 +13,7 @@ exports.createUsersTable = function(req, res) {
   
 exports.createTestTable = function(req, res) {
   logger.log(`POST request received at /admin/testTable`)
-  db.createTable(db.tables.TESTOBJECT)
+  createTable(tables.TESTOBJECT)
     .then(result => res.send({ statusCode: 200, body: result }))
     .catch(err => {
       logger.error(err);
@@ -23,7 +23,7 @@ exports.createTestTable = function(req, res) {
 
 exports.deleteUsersTable = function(req, res) {
   logger.log(`DELETE request received at /admin/usersTable`)
-  db.dropTable(db.tables.USERS)
+  dropTable(tables.USERS)
     .then(result => res.send({ statusCode: 200, body: result }))
     .catch(err => {
       logger.error(err);
@@ -33,7 +33,7 @@ exports.deleteUsersTable = function(req, res) {
     
 exports.deleteTestTable = function(req, res) {
   logger.log(`DELETE request received at /admin/testTable`)
-  db.dropTable(db.tables.TESTOBJECT)
+  dropTable(tables.TESTOBJECT)
     .then(result => res.send({ statusCode: 200, body: result }))
     .catch(err => {
       logger.error(err);
