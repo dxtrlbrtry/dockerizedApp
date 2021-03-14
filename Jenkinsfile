@@ -28,7 +28,7 @@ node('master') {
             }
             try {
                 stage('run tests') {
-                    bat 'docker start -a testpipeline_tests_1'
+                    //bat 'docker start -a testpipeline_tests_1'
 
                     def jsonReport = readJSON file: 'tests/fixtures/reports/report.json'
                     println(jsonReport)
