@@ -46,3 +46,4 @@ services:
       - ./tests/fixtures:/app/tests/fixtures
       - ./tests/lib:/app/tests/lib
       - ./tests/run.js:/app/tests/run.js
+      - ./tests/reports:/app/tests/reports

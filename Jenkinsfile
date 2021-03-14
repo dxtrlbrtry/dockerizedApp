@@ -21,18 +21,16 @@ node('master') {
                     bat "docker-compose build app"
                 }
                 if (params.REBUILD_TESTS) {
-                    bat "docker-compose stop -f tests"
                     bat "docker-compose build tests"
                 }
                 bat "docker-compose up -d db"
                 bat "docker-compose up -d app"
-                bat "docker-compose up tests"
             }
             try {
                 stage('run tests') {
-                    //bat 'docker start -a testpipeline_tests_1'
+                    bat "docker-compose up tests"
 
-                    def jsonReport = readJSON file: 'tests/fixtures/reports/report.json'
+                    def jsonReport = readJSON file: 'tests/reports/report.json'
                     println(jsonReport)
                     for (fixture in jsonReport.fixtures) {
                         for (test in fixture.tests) {
@@ -46,7 +44,7 @@ node('master') {
             }
             finally {
                 stage('archive') {
-                    archiveArtifacts artifacts: 'tests/fixtures/reports/report.json', followSymlinks: false
+                    archiveArtifacts artifacts: 'tests/reports/report.json', followSymlinks: false
                 }
             }
         }
