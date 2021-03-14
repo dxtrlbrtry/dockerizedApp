@@ -12,7 +12,8 @@ async function sendRequest(options) {
     }).catch(err => logger.error(err));
 }
 
-exports.get = async function (endpoint) {
+exports.get = async function (endpoint, params) {
+  if (params) endpoint = `${endpoint}?${Object.keys(params).map(k => `${k}=${params[k]}`).join('&')}`
   return await sendRequest({
     method: 'GET',
     url: baseUrl + endpoint,

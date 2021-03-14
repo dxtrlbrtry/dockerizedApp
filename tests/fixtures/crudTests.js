@@ -25,7 +25,7 @@ test('CRUD user tests', async t => {
             logger.log('add successful');
         });
 
-    await apiService.get('/users?name=' + user.name)
+    await apiService.get('/users/', user)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(validator.validate(resp.body, schemas.users).valid).ok()
@@ -86,7 +86,7 @@ test.after(async () => await apiService.delete('/admin/testTable/'))
             logger.log('objects added')
         });
 
-    await apiService.get('/test?prop1=' + testObject1.prop1 + '&prop2=' + testObject1.prop2)
+    await apiService.get('/test/', testObject1)
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(validator.validate(resp.body, schemas.testObjects).valid).ok()
