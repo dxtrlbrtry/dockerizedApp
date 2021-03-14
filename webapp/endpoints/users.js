@@ -3,7 +3,7 @@ const logger = require('../../common/logger')
 
 exports.getUsers = function(req, res) {
   logger.log(`GET request received at /users/`)
-  db.getTable(db.tables.USERS)
+  db.getTable(db.tables.USERS, req.query)
     .then(result => res.send({ statusCode: 200, body: result }))
     .catch(err => {
       logger.error(err);

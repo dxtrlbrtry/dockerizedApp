@@ -3,7 +3,7 @@ const logger = require('../../common/logger');
 
 const tables = {
   USERS: 'users',
-  TESTOBJECT: 'testObject'
+  TESTOBJECT: 'testTable'
 }
 
 exports.tables = tables;
@@ -26,11 +26,11 @@ exports.createTable = async function(table) {
       switch (table) {
         case tables.USERS: {
           return getQueryResult(
-            await session.sql('CREATE TABLE users ( id INT PRIMARY KEY AUTO_INCREMENT, name varchar(255));').execute());
+            await session.sql(`CREATE TABLE ${table} ( id INT PRIMARY KEY AUTO_INCREMENT, name varchar(255));`).execute());
         }
         case tables.TESTOBJECT: {
           return getQueryResult(
-            await session.sql('CREATE TABLE testTable ( prop1 varchar(255), prop2 varchar(255));').execute());
+            await session.sql(`CREATE TABLE ${table} ( prop1 varchar(255), prop2 varchar(255));`).execute());
         }
         default: {
           throw `Schema ${JSON.stringify(table)} not implemented`
@@ -48,19 +48,8 @@ exports.dropTable = async function(table) {
   return createSession().then(async session => {
     try {
       logger.log(`Dropping table for schema ${table}`)
-      switch (table) {
-        case tables.USERS: {
-          return getQueryResult(
-            await session.sql('DROP TABLE users').execute());
-        }
-        case tables.TESTOBJECT: {
-          return getQueryResult(
-            await session.sql('DROP TABLE testTable').execute());
-        }
-        default: {
-          throw `Schema ${JSON.stringify(table)} not implemented`
-        }
-      }
+      return getQueryResult(
+        await session.sql(`DROP TABLE ${table}`).execute());
     } catch (err) {
       throw `Failed dropping table for schema ${table} due to: ${err}`
     } finally {
@@ -69,48 +58,12 @@ exports.dropTable = async function(table) {
   });
 }
 
-exports.insertItem = async function(table, item) {
-  return await createSession().then(async session => {
-    try {
-      logger.log(`Inserting item ${JSON.stringify(item)} to table ${table}`)
-      switch (table) {
-        case tables.USERS: {
-          return getQueryResult(
-            await session.sql('INSERT INTO users(name) VALUES ("' + item.name + '")').execute());
-        }
-        case tables.TESTOBJECT: {
-          return getQueryResult(
-            await session.sql('INSERT INTO testTable(prop1, prop2) VALUES ("' + item.prop1 + '", "' + item.prop2 + '")').execute());
-        }
-        default: {
-          throw `Schema ${JSON.stringify(table)} not implemented`
-        }
-      }
-    } catch (err) {
-      throw `Failed inserting item ${JSON.stringify(item)} to table ${table} due to ${err}`
-    } finally {
-      session.close();
-    }
-  });
-}
-
-exports.getTable = async function(table) {
+exports.getTable = async function(table, params) {
   return await createSession().then(async session => {
     try {
       logger.log(`Getting table for schema ${table}`)
-      switch (table) {
-        case tables.USERS: {
-          return getQueryResult(
-            await session.sql('SELECT * FROM users').execute());
-        }          
-        case tables.TESTOBJECT: {
-          return getQueryResult(
-            await session.sql('SELECT * FROM testTable').execute());
-        }
-        default: {
-          throw `Schema ${JSON.stringify(table)} not implemented`
-        }
-      }
+      return getQueryResult(
+        await session.sql(composeGetQuery(table, params)).execute());
     } catch (err) {
       throw `Failed getting table for schema ${table} due to ${err}`
     } finally {
@@ -119,29 +72,49 @@ exports.getTable = async function(table) {
   });
 }
 
-exports.deleteItem = async function(table, item) {
+exports.insertItem = async function(table, items) {
   return await createSession().then(async session => {
     try {
-      logger.log(`Deleting item ${JSON.stringify(item)} from table ${table}`)
-      switch (table) {
-        case tables.USERS: {
-          return getQueryResult(
-            await session.sql('DELETE FROM users WHERE name="' + item.name + '"').execute());
-        }
-        case tables.TESTOBJECT: {
-          return getQueryResult(
-            await session.sql('DELETE FROM testTable WHERE prop1="' + item.prop1 + '"').execute());
-        }
-        default: {
-          throw `Schema ${JSON.stringify(table)} not implemented`
-        }
-      }
-    } catch(err) {
-      throw `Failed deleting item ${JSON.stringify(item)} from table ${table} due to ${err}`
+      logger.log(`Inserting item ${JSON.stringify(items)} to table ${table}`)
+      return getQueryResult(
+        await session.sql(composeInsertQuery(table, items)).execute());
+    } catch (err) {
+      throw `Failed inserting items ${JSON.stringify(items)} to table ${table} due to ${err}`
     } finally {
       session.close();
     }
   });
+}
+
+exports.deleteItem = async function(table, items) {
+  return await createSession().then(async session => {
+    try {
+      logger.log(`Deleting item ${JSON.stringify(items)} from table ${table}`)
+      return getQueryResult(
+        await session.sql(composeDeleteQuery(table, items)).execute());
+    } catch(err) {
+      throw `Failed deleting item ${JSON.stringify(items)} from table ${table} due to ${err}`
+    } finally {
+      session.close();
+    }
+  });
+}
+
+function composeGetQuery(table, params) {
+  if (Object.keys(params).length > 0) {
+    return `SELECT * FROM ${table} WHERE (${Object.keys(params).map(p => `${p}="${params[p]}"`).join(' AND ')})`
+  }
+  return `SELECT * FROM ${table}`
+}
+
+function composeInsertQuery(table, items) {
+  if (!Array.isArray(items)) items = [items];
+  return `INSERT INTO ${table} (${Object.keys(items[0]).join(',')}) VALUES (${items.map(item => Object.keys(item).map(p => `"${item[p]}"`).join(',')).join('),(')})`
+}
+
+function composeDeleteQuery(table, items) {
+  if (!Array.isArray(items)) items = [items];
+  return `DELETE FROM ${table} WHERE (${items.map(item => Object.keys(item).map(p => `${p}="${item[p]}"`).join(' AND ')).join(') OR (')})`
 }
 
 function getQueryResult(res) {

@@ -18,18 +18,20 @@ test('CRUD user tests', async t => {
             logger.log('get successful');
         });
 
-    await apiService.post('/users/', user)
+    await apiService.post('/users/', [user, user])
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202)
                 .expect(validator.validate(resp.body, schemas.message).valid).ok();
             logger.log('add successful');
         });
-    await apiService.post('/users/', user)
+
+    await apiService.get('/users?name=' + user.name)
         .then(async resp => {
-            await t.expect(resp.statusCode).eql(202)
-                .expect(validator.validate(resp.body, schemas.message).valid).ok();
-            logger.log('add successful');
-        });
+            await t.expect(resp.statusCode).eql(200)
+                .expect(validator.validate(resp.body, schemas.users).valid).ok()
+                .expect(resp.body.some(u => u.name == user.name)).ok();
+            logger.log('get by name successful');
+        })
 
     await apiService.get('/users/')
         .then(async resp => {
@@ -70,26 +72,27 @@ test.after(async () => await apiService.delete('/admin/testTable/'))
     var testObject1 = { prop1: "testprop11", prop2: "testprop12" };
     var testObject2 = { prop1: "testprop21", prop2: "testprop22" };
 
-    
     await apiService.get('/test/')
         .then(async resp => {
             await t.expect(resp.statusCode).eql(200)
                 .expect(validator.validate(resp.body, schemas.message).valid).ok();
-            logger.log('empty db validated')
+            logger.log('empty db validated');
         });
 
-    await apiService.post('/test/', testObject1)
+    await apiService.post('/test/', [testObject1, testObject2])
         .then(async resp => {
             await t.expect(resp.statusCode).eql(202)
                 .expect(validator.validate(resp.body, schemas.message).valid).ok();
             logger.log('objects added')
         });
-    await apiService.post('/test/', testObject2)
+
+    await apiService.get('/test?prop1=' + testObject1.prop1 + '&prop2=' + testObject1.prop2)
         .then(async resp => {
-            await t.expect(resp.statusCode).eql(202)
-                .expect(validator.validate(resp.body, schemas.message).valid).ok();
-            logger.log('objects added')
-        });
+            await t.expect(resp.statusCode).eql(200)
+                .expect(validator.validate(resp.body, schemas.testObjects).valid).ok()
+                .expect(resp.body.some(o => o.prop1 = testObject1.prop1 && o.prop2 == testObject1.prop2)).ok()
+            logger.log('get single object successful')
+        })
 
     await apiService.get('/test/')
         .then(async resp => {

@@ -3,7 +3,7 @@ const logger = require('../../common/logger')
 
 exports.createUsersTable = function(req, res) {
   logger.log(`POST request received at /admin/usersTable`)
-  db.createTable(db.tables.USER)
+  db.createTable(db.tables.USERS)
     .then(result => res.send({ statusCode: 200, body: result }))
     .catch(err => {
       logger.error(err);
@@ -23,7 +23,7 @@ exports.createTestTable = function(req, res) {
 
 exports.deleteUsersTable = function(req, res) {
   logger.log(`DELETE request received at /admin/usersTable`)
-  db.dropTable(db.tables.USER)
+  db.dropTable(db.tables.USERS)
     .then(result => res.send({ statusCode: 200, body: result }))
     .catch(err => {
       logger.error(err);
