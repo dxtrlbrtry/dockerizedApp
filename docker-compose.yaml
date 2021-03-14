@@ -26,9 +26,7 @@ services:
     ports:
       - ${APP_PORT}:${APP_PORT}
     volumes:
-      - ./webapp/endpoints:/app/webapp/endpoints
-      - ./webapp/lib:/app/webapp/lib
-      - ./webapp/app.js:/app/webapp/app,js
+      - ./webapp/:/app/webapp/
     depends_on:
       - db
     stdin_open: true
@@ -43,7 +41,4 @@ services:
       APP_PORT: ${APP_PORT}
       LOGGING_LEVEL: ${LOGGING_LEVEL}
     volumes:
-      - ./tests/fixtures:/app/tests/fixtures
-      - ./tests/lib:/app/tests/lib
-      - ./tests/run.js:/app/tests/run.js
-      - ./tests/reports:/app/tests/reports
+      - ./tests/:/app/tests/
