@@ -24,8 +24,7 @@ node('master') {
                     bat "docker-compose stop -f tests"
                     bat "docker-compose build tests"
                 }
-                bat "docker-compose up -d db"
-                bat "docker-compose up -d app"
+                bat "docker-compose up"
             }
             try {
                 stage('run tests') {
