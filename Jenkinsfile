@@ -27,17 +27,20 @@ node('master') {
             }
             try {
                 stage('run tests') {
-                    bat "docker-compose up tests"
-
-                    def jsonReport = readJSON file: 'tests/reports/report.json'
-                    for (fixture in jsonReport.fixtures) {
-                        for (test in fixture.tests) {
-                            for (error in test.errs) {
-                                echo error
-                                currentBuild.result = 'UNSTABLE'
+                    docker.image('tests').inside('--rm -w /app/ -it --network=host -e APP_HOST=127.0.0.1 -e APP_PORT=1234 -e LOGGING_LEVEL=1 -v F:/dockerizedApp/tests/:/app/tests/ -v common:/app/common/'){
+                        def jsonReport = readJSON file: 'tests/reports/report.json'
+                        for (fixture in jsonReport.fixtures) {
+                            for (test in fixture.tests) {
+                                for (error in test.errs) {
+                                    echo error
+                                    currentBuild.result = 'UNSTABLE'
+                                }
                             }
                         }
                     }
+                    //bat "docker-compose up tests"
+
+                    
                 }
             }
             finally {

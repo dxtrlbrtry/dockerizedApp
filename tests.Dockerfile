@@ -5,7 +5,5 @@ COPY tests/.testcaferc.json .
 COPY tests ./tests
 COPY common  ./common
 RUN npm install
-RUN apk update && \
-    apk add --no-cache \
-    chromium
+RUN apk update && apk add --no-cache chromium
 CMD ["node", "tests/run.js"]
