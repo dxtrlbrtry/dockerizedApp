@@ -28,7 +28,7 @@ node('master') {
             try {
                 stage('run tests') {
                     //bat "docker-compose up tests"
-                    bat "docker run --network=host -e APP_HOST=localhost -e APP_PORT=1235 -e LOGGING_LEVEL=1 -v '" + pwd() + "/tests/:/app/tests/' -v common:/app/common/ tests"
+                    bat "docker run --network=host -e APP_HOST=localhost -e APP_PORT=" + env.APP_PORT + " -e LOGGING_LEVEL=1 -v '" + pwd() + "/tests/:/app/tests/' -v common:/app/common/ tests"
                     def jsonReport = readJSON file: 'tests/reports/report.json'
                     for (fixture in jsonReport.fixtures) {
                         for (test in fixture.tests) {
